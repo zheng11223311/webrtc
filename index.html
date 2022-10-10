@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script> -->
+  <script src="scaledrone.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 16px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      list-style: none;
+      text-decoration: none;
+    }
+
+    body,
+    html {
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+    }
+
+    .copy {
+      position: fixed;
+      width: 90%;
+      text-align: center;
+      height: 100px;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.5);
+
+    }
+
+    video {
+      position: absolute;
+      top: 20%;
+      width: 40%;
+      object-fit: cover;
+      margin-left: 3%;
+      box-shadow: rgba(156, 172, 172, 0.2) 0px 2px 2px, rgba(156, 172, 172, 0.2) 0px 4px 4px, rgba(156, 172, 172, 0.2) 0px 8px 8px, rgba(156, 172, 172, 0.2) 0px 16px 16px, rgba(156, 172, 172, 0.2) 0px 32px 32px, rgba(156, 172, 172, 0.2) 0px 64px 64px;
+
+    }
+
+    .remoteVideo {
+      left: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="copy">发送你的地址给好友开始通话: <br>
+    <span></span>
+  </div>
+
+  <video id="localVideo" class="localVideo" autoplay muted></video>
+  <video id="remoteVideo" class="remoteVideo" autoplay></video>
+  <script>
+    document.querySelector('.copy span').innerText = location.href;
+    console.log(navigator.userAgent);
+    // 系统区分
+    var getOS = function () {
+      var u = navigator.userAgent
+      if (!!u.match(/compatible/i) || u.match(/Windows/i)) {
+        return 'windows'
+      } else if (!!u.match(/Macintosh/i) || u.match(/MacIntel/i)) {
+        return 'macOS'
+      } else if (!!u.match(/iphone/i) || u.match(/Ipad/i)) {
+        return 'ios'
+      } else if (u.match(/android/i)) {
+        return 'android'
+      } else if (u.match(/Ubuntu/i)) {
+        return 'Ubuntu'
+      } else {
+        return 'other'
+      }
+    }
+    console.log(getOS());
+    if (getOS() == 'android' || getOS() == 'ios') {
+      let bigscreen = 1
+      localVideo.style.width = '40%'
+      localVideo.style.height = '200px'
+      localVideo.style.zIndex = '2'
+      remoteVideo.style.zIndex = '1'
+      localVideo.style.top = '0'
+      remoteVideo.style.top = '0'
+      remoteVideo.style.left = '0'
+      remoteVideo.style.height = '100vh'
+      // console.log(localVideo.style.width);
+      remoteVideo.style.width = "100%"
+      function triggerscreens(e){
+        // console.log(e);
+        // console.log(bigscreen);
+        if (bigscreen == 0) {
+          console.log(1);
+        localVideo.style.width = '40%'
+        localVideo.style.height = '200px'
+        localVideo.style.zIndex = '2'
+        remoteVideo.style.zIndex = '1'
+        localVideo.style.top = '0'
+        remoteVideo.style.top = '0'
+        remoteVideo.style.left = '0'
+        remoteVideo.style.width = '100vw'
+        remoteVideo.style.height = '100vh'
+        bigscreen = 1
+      } else {
+        console.log(123);
+        remoteVideo.style.width = '40%'
+        remoteVideo.style.height = '200px'
+        remoteVideo.style.zIndex = '2'
+        localVideo.style.zIndex = '1'
+        remoteVideo.style.top = '0'
+        localVideo.style.top = '0'
+        localVideo.style.left = '0'
+        localVideo.style.height = '100vh'
+        localVideo.style.width = '100vw'
+        bigscreen = 0
+      }
+      }
+      localVideo.onclick = triggerscreens
+      remoteVideo.onclick = triggerscreens
+    }
+  </script>
+  <script src="script.js"></script>
+
+</body>
+
+</html>
