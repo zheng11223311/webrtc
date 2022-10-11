@@ -3,9 +3,10 @@
 
 <head>
   <!-- <script type='text/javascript' src='https://cdn.scaledrone.com/scaledrone.min.js'></script> -->
-  <script src="scaledrone.min.js"></script>
+  <script src="./scaledrone.min.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="./font/iconfont.css">
   <style>
     * {
       margin: 0;
@@ -40,7 +41,7 @@
 
     video {
       position: absolute;
-      top: 20%;
+      top: 100px;
       width: 40%;
       object-fit: cover;
       margin-left: 3%;
@@ -51,6 +52,36 @@
     .remoteVideo {
       left: 50%;
     }
+
+    .hung {
+      position: absolute;
+      bottom: 10%;
+      width: 110px;
+      left: calc((100vw - 220px)/2);
+    }
+    .hung button {
+      width: 100%;
+      height: 50px;
+      outline: none;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all .5s;
+      background-color: #cb7840;
+      color: #fff;
+    }
+    .hung button:hover{
+      background-color: #ccc;
+      color: #fff;
+      box-shadow: 5px 5px 6px #ccc;
+      transform: translate(5px,-10px);
+      background-color: red;
+    }
+    .hung button span{
+      font-size: 30px;
+    }
+
   </style>
 </head>
 
@@ -58,9 +89,15 @@
   <div class="copy">发送你的地址给好友开始通话: <br>
     <span></span>
   </div>
-
-  <video id="localVideo" class="localVideo" autoplay muted></video>
-  <video id="remoteVideo" class="remoteVideo" autoplay></video>
+  <div>
+    <video id="localVideo" class="localVideo" autoplay muted></video>
+    <video id="remoteVideo" class="remoteVideo" autoplay></video>
+  </div>
+  <div>
+    <div class="hung">
+      <button title="挂断视频"><span class="iconfont icon-14guaduan-2"></span></button>
+    </div>
+  </div>
   <script>
     document.querySelector('.copy span').innerText = location.href;
     console.log(navigator.userAgent);
@@ -94,40 +131,44 @@
       remoteVideo.style.height = '100vh'
       // console.log(localVideo.style.width);
       remoteVideo.style.width = "100%"
-      function triggerscreens(e){
+
+      function triggerscreens(e) {
         // console.log(e);
         // console.log(bigscreen);
         if (bigscreen == 0) {
           console.log(1);
-        localVideo.style.width = '40%'
-        localVideo.style.height = '200px'
-        localVideo.style.zIndex = '2'
-        remoteVideo.style.zIndex = '1'
-        localVideo.style.top = '0'
-        remoteVideo.style.top = '0'
-        remoteVideo.style.left = '0'
-        remoteVideo.style.width = '100vw'
-        remoteVideo.style.height = '100vh'
-        bigscreen = 1
-      } else {
-        console.log(123);
-        remoteVideo.style.width = '40%'
-        remoteVideo.style.height = '200px'
-        remoteVideo.style.zIndex = '2'
-        localVideo.style.zIndex = '1'
-        remoteVideo.style.top = '0'
-        localVideo.style.top = '0'
-        localVideo.style.left = '0'
-        localVideo.style.height = '100vh'
-        localVideo.style.width = '100vw'
-        bigscreen = 0
-      }
+          localVideo.style.width = '40%'
+          localVideo.style.height = '200px'
+          localVideo.style.zIndex = '2'
+          remoteVideo.style.zIndex = '1'
+          localVideo.style.top = '0'
+          remoteVideo.style.top = '0'
+          remoteVideo.style.left = '0'
+          remoteVideo.style.width = '100vw'
+          remoteVideo.style.height = '100vh'
+          bigscreen = 1
+        } else {
+          console.log(123);
+          remoteVideo.style.width = '40%'
+          remoteVideo.style.height = '200px'
+          remoteVideo.style.zIndex = '2'
+          localVideo.style.zIndex = '1'
+          remoteVideo.style.top = '0'
+          localVideo.style.top = '0'
+          localVideo.style.left = '0'
+          localVideo.style.height = '100vh'
+          localVideo.style.width = '100vw'
+          bigscreen = 0
+        }
       }
       localVideo.onclick = triggerscreens
       remoteVideo.onclick = triggerscreens
+      document.querySelector('.copy').style.display = "none"
     }
+
   </script>
-  <script src="script.js"></script>
+  <!-- <script src="./WebRTC/script.js"></script> -->
+  <!-- <script src="./script.js"></script> -->
 
 </body>
 

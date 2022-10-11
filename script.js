@@ -89,14 +89,12 @@ if (!location.hash) {
       }
     };
     
-    console.log(navigator)
-    console.log(window.navigator)
     // 意思是必须使用HTTPS加密通信才能获取getUserMedia()
     navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
     }).then(stream => {
-        console.log(stream);
+      console.log(stream);
       // Display your local video in #localVideo element
       localVideo.srcObject = stream;
       // Add your stream to be sent to the conneting peer
